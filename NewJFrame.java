@@ -6,6 +6,7 @@
 package area.calculator;
 
 import com.sun.corba.se.impl.logging.InterceptorsSystemException;
+import java.util.ArrayList;
 import javax.print.DocFlavor;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -19,26 +20,26 @@ class rana
     String name;
     String course;
     int fees;
-   void getval(String name,String course,int fees)
+   rana(String name,String course,int fees)
    {
        this.name=name;
        this.course=course;
        this.fees=fees;
        
    }
-   void print()
+  /* void print()
    {
        System.out.println(name);
        System.out.println(course);
        System.out.println(fees);
-   }
+   }*/
 }
     
 public class NewJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
+   ArrayList <rana> obj=new ArrayList <>();
+   
+   
     public NewJFrame() {
         initComponents();
     }
@@ -60,6 +61,7 @@ public class NewJFrame extends javax.swing.JFrame {
         c = new javax.swing.JTextField();
         f = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -94,6 +96,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("display");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,8 +122,10 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(f)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(168, 168, 168)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton2)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +143,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(165, Short.MAX_VALUE))
         );
 
@@ -150,25 +163,30 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        String name=sn1.getText();
        String course=c.getText();
-       int fees=0;
-       try {
-        fees=Integer.parseInt(f.getText());
-       }
-       catch(NumberFormatException e){
-   //        System.out.print("number error");
-             JOptionPane.showMessageDialog(null,e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
-       }
-        rana ob=new rana();
-        ob.getval(name,course,fees);
-        ob.print();
-        
+       int fees=Integer.parseInt(f.getText());
+       
+       obj.add(new rana(name,course,fees));
+       
+       
+       
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // TODO add your handling code here:
+        for(int i=0;i<obj.size();i++)
+        {
+            System.out.println("student name"+i+"is :"+obj.get(i).name);
+             System.out.println("course name"+i+"is :"+obj.get(i).course);
+              System.out.println("fees"+i+"is :"+obj.get(i).fees);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -203,6 +221,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField c;
     private javax.swing.JTextField f;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
